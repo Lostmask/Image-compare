@@ -1,6 +1,6 @@
 # Image-compare
-Compare images with OpenCV
-Depends on OpenCV and GoogleTest
+Compare images with OpenCV.
+Depends on OpenCV and GoogleTest.
 To build project:
 ```
 mkdir bld

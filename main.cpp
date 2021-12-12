@@ -1,3 +1,4 @@
+#include "imgcompare.h"
 #include <opencv2/core.hpp>
 #include <opencv2/imgproc.hpp>
 #include <opencv2/imgcodecs.hpp>
@@ -28,11 +29,6 @@ std::string get_file_name()
     }
     return res;
 }
-int compareimages(cv::Mat& image1, cv::Mat image2)
-{
-    int res = 0;
-    return res;   
-}
 int main(int argc, char** argv)
 {
     int accuracy =  get_accuracy_param();
@@ -50,11 +46,10 @@ int main(int argc, char** argv)
     }
     for(auto it1 = fnames.begin(); it1 < fnames.end();++it1)
     {
-        cv::Mat img1 = cv::imread(*it1);
         for(auto it2 = it1 + 1; it2 < fnames.end(); ++it2)
         {
-            cv::Mat img2 = cv::imread(*it2);
-            auto match = compareimages(img1, img2);
+            auto comp = mycompare::ImagesCompare::create(*it1, *it2);
+            auto match = comp->run();
             if(match >= accuracy)
             {
                 std::cout<< (*it1) <<", "<< (*it2)<<", "<<match<<"\%"<<std::endl;
